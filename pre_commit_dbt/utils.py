@@ -103,10 +103,7 @@ class ExposureSchema:
     exposure_name: str
     exposure_type: str
     owner: Dict[str, Any]
-<<<<<<< HEAD
     models: List[str]
-=======
->>>>>>> d9e75f0 (Added exposure owner check hook)
     filename: str
     prefix: str = "exposure"
 
