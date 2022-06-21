@@ -103,7 +103,10 @@ class ExposureSchema:
     exposure_name: str
     exposure_type: str
     owner: Dict[str, Any]
+<<<<<<< HEAD
     models: List[str]
+=======
+>>>>>>> d9e75f0 (Added exposure owner check hook)
     filename: str
     prefix: str = "exposure"
 
@@ -326,6 +329,7 @@ def get_filenames(
     for path in paths:
         file = Path(path)
         filename = file.stem
+        print(extensions)
         if extensions and file.suffix not in extensions:
             pass
         else:
