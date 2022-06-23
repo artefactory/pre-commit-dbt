@@ -4,6 +4,9 @@
 
 [`check-column-name-contract`]: https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-name-contract
 
+**Exposure checks:**
+ * [`check-exposure-has-models`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-has-models): Check if the exposures depends on at least one model
+
 **Model checks:**
  * [`check-column-desc-are-same`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-desc-are-same): Check column descriptions are the same.
  * [`check-column-name-contract`](): Check column name abides to contract.
@@ -1356,6 +1359,29 @@ You want to make sure that all specified arguments in the properties files (usua
 
 If you `run` and then you delete argument description from a properties file, the hook success since the description is still present in `manifest.json`.
 
+-----
+### 'check-exposure-has-models
+
+Check if each exposure depends on at least one model
+
+#### Example
+```
+repos:
+- repo: https://github.com/artefactory/pre-commit-dbt
+ rev: v1.0.0
+ hooks:
+ - id: check-exposure-has-models
+```
+
+#### How it works
+
+- Hook takes all `yml` files.
+- Exposures are extracted as objects
+- Check if there are at least one model defined in each exposure
+
+### When to use it
+
+You want to make sure that the field `depends_on` in each exposure is defined
 -----
 
 ### `generate-missing-sources`
