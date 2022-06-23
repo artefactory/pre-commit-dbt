@@ -9,6 +9,8 @@
 
  * [`check-exposure_folder_constraint`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-folder-constraint): Ensures exposures are only defined in a given folder X.
  
+ * [`check-exposure-has-owner`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-has-owner): Check if the exposures' owners have a name field defined.
+
 **Model checks:**
  * [`check-column-desc-are-same`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-desc-are-same): Check column descriptions are the same.
  * [`check-column-name-contract`](): Check column name abides to contract.
@@ -92,6 +94,25 @@
 
  -----
 
+### `check-exposure-has-owner`
+
+Check if the exposures' owners have a name field defined.
+
+#### Example
+```
+repos:
+- repo: https://github.com/artefactory/pre-commit-dbt
+ rev: v1.0.0
+ hooks:
+ - id: check-exposure-has-owner
+```
+
+#### How it works
+
+- Hook takes all `yml` files.
+- Exposures are extracted as objects and iterated over to check if the "name" field is defined.
+
+-----
 ### `check-column-desc-are-same`
 
 Check the models have the same descriptions for the same column names.
