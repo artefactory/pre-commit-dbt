@@ -13,7 +13,7 @@ from typing import Sequence
 from typing import Set
 from typing import Text
 from typing import Union
-
+import logging
 import yaml
 
 
@@ -158,6 +158,17 @@ def get_source_schemas(
                     source_schema=source,
                     table_schema=table,
                 )
+
+def get_source_path(
+    yml_files: Sequence[Path],
+) -> Generator[SourceSchema, None, None]:
+    source_paths = []
+    for yml_file in yml_files:
+        schema = yaml.safe_load(yml_file.open())
+        if schema.get("sources", []) is not None:
+            source_paths.append(yml_file)
+    return source_paths
+
 
 
 def obj_in_child(obj: Any, child_name: str) -> bool:
