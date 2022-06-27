@@ -162,10 +162,12 @@ def get_source_schemas(
 def get_source_path(
     yml_files: Sequence[Path],
 ) -> Generator[SourceSchema, None, None]:
+    logging.basicConfig(filename='example2.log', encoding='utf-8', level=logging.DEBUG)
     source_paths = []
     for yml_file in yml_files:
         schema = yaml.safe_load(yml_file.open())
-        if schema.get("sources", []) is not None:
+        logging.debug('%s condition %s', yml_file, len(schema.get("sources", []))!=0)
+        if len(schema.get("sources", []))!=0:
             source_paths.append(yml_file)
     return source_paths
 
