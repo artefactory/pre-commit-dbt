@@ -13,7 +13,6 @@ from typing import Sequence
 from typing import Set
 from typing import Text
 from typing import Union
-
 import yaml
 
 
@@ -219,6 +218,18 @@ def get_source_schemas(
                     table_schema=table,
                 )
 
+"""
+ Returns the paths of yaml files that contain sources
+ Arguments:
+     yml_files: a sequence of yaml file paths
+ Returns:
+     List of the yaml file paths in which a source or more has been defined
+ """
+def get_source_path(
+    yml_files: Sequence[Path],
+) -> Generator[SourceSchema, None, None]:
+    source_paths = [yml_file for yml_file in yml_files if len(yaml.safe_load(yml_file.open()).get("sources", []))!=0]
+    return source_paths
 
 def obj_in_deps(obj: Any, dep_name: str) -> bool:
     dep_split = set(dep_name.split("."))
