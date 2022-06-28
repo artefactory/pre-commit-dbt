@@ -13,7 +13,6 @@ from typing import Sequence
 from typing import Set
 from typing import Text
 from typing import Union
-import logging
 import yaml
 
 
@@ -159,16 +158,17 @@ def get_source_schemas(
                     table_schema=table,
                 )
 
+"""
+ Returns the paths of yaml files that contain sources
+ Arguments:
+     yml_files: a sequence of yaml file paths
+ Returns:
+     List of the yaml file paths in which a source or more has been defined
+ """
 def get_source_path(
     yml_files: Sequence[Path],
 ) -> Generator[SourceSchema, None, None]:
-    logging.basicConfig(filename='example2.log', encoding='utf-8', level=logging.DEBUG)
-    source_paths = []
-    for yml_file in yml_files:
-        schema = yaml.safe_load(yml_file.open())
-        logging.debug('%s condition %s', yml_file, len(schema.get("sources", []))!=0)
-        if len(schema.get("sources", []))!=0:
-            source_paths.append(yml_file)
+    source_paths = [yml_file for yml_file in yml_files if len(yaml.safe_load(yml_file.open()).get("sources", []))!=0]
     return source_paths
 
 
