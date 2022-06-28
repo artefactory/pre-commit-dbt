@@ -56,6 +56,7 @@ If this is the case, `pre-commit-dbt` is here to help you!
 
 **Source checks:**
  * [`check-source-columns-have-desc`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-columns-have-desc): Check for source column descriptions.
+ * [`check-source-folder-constraint`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-source-folder-constraint): Check if source definitions are placed in the correct directory.
  * [`check-source-has-all-columns`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-has-all-columns): Check the source has all columns in the properties file.
  * [`check-source-table-has-description`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-table-has-description): Check the source table has description.
  * [`check-source-has-freshness`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-has-freshness): Check the source has the freshness.

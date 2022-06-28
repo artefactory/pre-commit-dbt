@@ -29,6 +29,7 @@
 
 **Source checks:**
  * [`check-source-columns-have-desc`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-columns-have-desc): Check for source column descriptions.
+ * [`check-source-folder-constraint`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-source-folder-constraint): Check if source definitions are placed in the correct directory.
  * [`check-source-has-all-columns`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-has-all-columns): Check the source has all columns in the properties file.
  * [`check-source-table-has-description`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-table-has-description): Check the source table has description.
  * [`check-source-has-freshness`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-source-has-freshness): Check the source has the freshness.
@@ -888,6 +889,27 @@ You want to make sure that all specified columns in the properties files (usuall
 - If any column in the source does not contain a description, the hook fails.
 
 -----
+
+### `check-source-folder-constraint`
+
+ * Check if source definitions are placed in the correct directory.
+
+ #### Example
+ ```
+ repos:
+ - repo: https://github.com/artefactory/pre-commit-dbt
+  rev: v1.0.0
+  hooks:
+  - id: check-source-folder-constraint
+    args: ['--folder-name', 'models', "--"]
+ ```
+
+ #### How it works
+
+ - Hook takes all `yml` files.
+ - Paths of yaml files that contain sources will be iterated over and checked if they match the path of the specified folder, given as argument.
+
+ -----
 
 ### `check-source-has-all-columns`
 
