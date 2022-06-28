@@ -7,6 +7,8 @@
 **Exposure checks:**
  * [`check-exposure-has-models`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-has-models): Check if the exposures depends on at least one model
 
+ * [`check-exposure_folder_constraint`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-folder-constraint): Ensures exposures are only defined in a given folder X.
+ 
 **Model checks:**
  * [`check-column-desc-are-same`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-desc-are-same): Check column descriptions are the same.
  * [`check-column-name-contract`](): Check column name abides to contract.
@@ -66,6 +68,30 @@
 :exclamation:**If you have an idea for a new hook or you found a bug, [let us know](https://github.com/offbi/pre-commit-dbt/issues/new)**:exclamation:
 
 ## Available Hooks
+### `check-exposure-folder-constraint`
+
+ * Checks if exposure definitions are placed in the directory, passed as argument.
+
+ #### Arguments
+
+`--folder-name`: Path to folder to be checked.
+
+ #### Example
+ ```
+ repos:
+ - repo: https://github.com/artefactory/pre-commit-dbt
+  rev: v1.0.0
+  hooks:
+  - id: check-exposure-folder-constraint
+ ```
+
+ #### How it works
+
+ - Hook takes all `yml` files.
+ - Paths of yaml files that contain exposure will be iterated over and checked if they match the path of the specified folder, given as argument.
+
+ -----
+
 ### `check-column-desc-are-same`
 
 Check the models have the same descriptions for the same column names.

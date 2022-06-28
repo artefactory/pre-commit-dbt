@@ -188,6 +188,12 @@
     entry: check-source-tags
     language: python
     types_or: [yaml]
+    id: check-exposure-folder-constraint
+    name: Check exposure folder constraint
+    description: Ensures exposures are only defined in a given folder X.
+    entry: check-exposure-folder-constraint
+    language: python
+    types_or: [yaml]
 -   id: dbt-clean
     name: dbt clean
     description: Deletes all folders specified in the clean-targets.
