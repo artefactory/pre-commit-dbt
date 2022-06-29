@@ -262,7 +262,7 @@
     types: [sql]
 -   id: check-source-folder-constraint
      name: Source folder constraint
-     description: Sources should be defined in declared folder
+     description: Sources should not be defined in declared folder
      entry: check-source-folder-constraint
      language: python
      types: [yaml]
