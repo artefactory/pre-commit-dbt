@@ -10,7 +10,7 @@ def has_models(paths: Sequence[str]):
     status_code = 0
     ymls = get_filenames(paths, [".yml", ".yaml"])
     exposures = get_exposures(list(ymls.values()))
-    missing_model = { exposure.exposure_name for exposure in exposures if exposure.models is None}
+    missing_model = [exposure.exposure_name for exposure in exposures if exposure.models is None]
     for exposure in missing_model:
         status_code = 1
         print(
@@ -22,7 +22,6 @@ def has_models(paths: Sequence[str]):
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int :
-    logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
     parser = argparse.ArgumentParser()
     add_filenames_args(parser)
     args = parser.parse_args(argv)
