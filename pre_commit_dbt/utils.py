@@ -231,16 +231,12 @@ def get_exposures(yml_files: Sequence[Path]) -> Generator[ExposureSchema, None, 
     for yml_file in yml_files:
         schema = yaml.safe_load(yml_file.open())
         for exposure in schema.get("exposures", []):
-            exposure_name = exposure.get("name")
-            exposure_type = exposure.get("type")
-            exposure_owner = exposure.get("owner")
-            exposure_models = exposure.get("depends_on")
             yield ExposureSchema(
-                    exposure_name=exposure_name,
+                    exposure_name=exposure.get("name"),
                     filename=yml_file.stem,
-                    exposure_type=exposure_type,
-                    owner=exposure_owner,
-                    models=exposure_models,
+                    exposure_type=exposure.get("type"),
+                    owner=exposure.get("owner"),
+                    models=exposure.get("depends_on"),
                 )
 
 def obj_in_deps(obj: Any, dep_name: str) -> bool:
