@@ -9,20 +9,10 @@ TESTS = (  # type: ignore
 version: 2
 exposures:
   - name: weekly_jaffle_metrics
-    type: dashboard
-    maturity: high
-    url: https://bi.tool/dashboards/1
-    description: >
-      Did someone say "exponential growth"?
-
     depends_on:
       - ref('fct_orders')
       - ref('dim_customers')
       - source('gsheets', 'goals')
-
-    owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
     """,
         0,
         [],
@@ -32,17 +22,7 @@ exposures:
 version: 2
 exposures:
   - name: weekly_jaffle_metrics
-    type: dashboard
-    maturity: high
-    url: https://bi.tool/dashboards/1
-    description: >
-      Did someone say "exponential growth"?
-
     depends_on:
-
-    owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
     """,
         1,
         [],
@@ -52,15 +32,6 @@ exposures:
 version: 2
 exposures:
   - name: weekly_jaffle_metrics
-    type: dashboard
-    maturity: high
-    url: https://bi.tool/dashboards/1
-    description: >
-      Did someone say "exponential growth"?
-
-    owner:
-      name: Claire from Data
-      email: data@jaffleshop.com
     """,
         1,
         [],
