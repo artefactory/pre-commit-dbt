@@ -142,9 +142,15 @@ def get_macros(
     for key, macro in macros.items():
         split_key = key.split(".")
         filename = split_key[-1]
+        print(filename)
+        if filename=="cents_to_dollars":
+            print("first condition",filename in filenames)
+        
+        print(split_key[0] == "macro")
         if filename in filenames and split_key[0] == "macro":
-            yield Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
-
+            macro_ref = Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
+            print (macro_ref)
+            yield macro_ref
 
 def get_flags(flags: Optional[Sequence[str]] = None) -> List[str]:
     if flags:
