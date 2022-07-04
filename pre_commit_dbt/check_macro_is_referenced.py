@@ -24,13 +24,14 @@ def has_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
     macros = get_macros(manifest, filenames)
     for i in macros :
         print (i)
+    
 
  
 # Opening JSON file
 
-f = open('/Users/charbel.naba/Downloads/jaffle_shop-main/target/manifest.json')
+f = open('/Users/miriam.benallou/Downloads/jaffle_shop-main/target/manifest.json')
 data = json.load(f)
-path_macro = ["/Users/charbel.naba/Downloads/jaffle_shop-main/macros/cents_to_dollars.sql"]
+path_macro = ["/Users/miriam.benallou/Downloads/jaffle_shop-main/macros/cents_to_dollars_test.sql"]
 has_reference(path_macro, data)
 
     
