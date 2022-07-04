@@ -251,14 +251,15 @@ def get_source_schemas(
                     table_schema=table,
                 )
 
-"""
-Extract exposures as objects from Yaml files
-Arguments:
-    yml_files: a sequence of Yaml files paths
-Yields:
-    Exposure objects
-"""                
+                
 def get_exposures(yml_files: Sequence[Path]) -> Generator[ExposureSchema, None, None]:
+    """
+    Extract exposures as objects from Yaml files
+    Arguments:
+        yml_files: a sequence of Yaml files paths
+    Yields:
+        Exposure objects
+    """
     for yml_file in yml_files:
         schema = yaml.safe_load(yml_file.open())
         for exposure in schema.get("exposures", []):
