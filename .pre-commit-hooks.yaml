@@ -260,15 +260,9 @@
     entry: remove-script-semicolon
     language: python
     types: [sql]
--   id: check-source-folder-constraint
-     name: Source folder constraint
-     description: Sources should not be defined in declared folder
-     entry: check-source-folder-constraint
-     language: python
-     types: [yaml]
 -   id: check-macro-is-referenced
-     name: Macro is referenced 
-     description: Defined macros have to be referenced 
-     entry: check-macro-is-referenced
-     language: python
-     types: [sql]
+    name: Check macro is referenced 
+    description: Defined macros have to be referenced 
+    entry: check-macro-is-referenced
+    language: python
+    types: [sql]
