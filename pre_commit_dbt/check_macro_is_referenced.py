@@ -19,11 +19,21 @@ def has_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
     status_code = 0
     sqls = get_macro_sqls(paths, manifest)
     filenames = set(sqls.keys())
+    nodes = manifest.get("nodes", {})
+    print(nodes)
 
     # get manifest macros that pre-commit found as changed
     macros = get_macros(manifest, filenames)
-    for i in macros :
-        print (i)
+    for macro in macros :
+        macro_name = macro.macro_name
+        for key,value in nodes :
+            print(value)
+            if macro_name in value.get("depends_on",{}).get("macros",{}):
+                return True
+            else:
+                pass
+        return False
+
     
 
  
