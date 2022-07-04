@@ -930,7 +930,7 @@ You want to make sure that all specified columns in the properties files (usuall
   rev: v1.0.0
   hooks:
   - id: check-source-folder-constraint
-    args: ['--folder-name', 'models', "--"]
+    args: ['--folder-name', 'models']
  ```
 
  #### How it works

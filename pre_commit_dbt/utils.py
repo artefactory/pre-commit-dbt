@@ -261,18 +261,31 @@ def get_exposures(yml_files: Sequence[Path]) -> Generator[ExposureSchema, None, 
                     models=exposure.get("depends_on"),
                 )
 
-"""
- Returns the paths of yaml files that contain sources
- Arguments:
-     yml_files: a sequence of yaml file paths
- Returns:
-     List of the yaml file paths in which a source or more has been defined
- """
+
+def contains_source(yml_file:Path)->bool:
+    """
+    Checks if a YAML file contains a source definition
+    Arguments:
+        yml_file: a yaml file path
+    Returns:
+        True if a source is defined, False otherwise
+    """
+    schema = yaml.safe_load(yml_file.open())
+    return True if schema.get("sources", [])!=0 else False
+
 def get_source_path(
     yml_files: Sequence[Path],
 ) -> Generator[SourceSchema, None, None]:
-    source_paths = [yml_file for yml_file in yml_files if len(yaml.safe_load(yml_file.open()).get("sources", []))!=0]
-    return source_paths
+    """
+    Returns the paths of yaml files that contain sources
+    Arguments:
+        yml_files: a sequence of yaml file paths
+    Returns:
+        Generator of the yaml file paths in which a source or more has been defined
+    """
+    for yml_file in yml_files:
+        if contains_source(yml_file):
+            yield yml_file
 
 def obj_in_deps(obj: Any, dep_name: str) -> bool:
     dep_split = set(dep_name.split("."))
