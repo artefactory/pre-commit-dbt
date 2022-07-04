@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -139,10 +140,10 @@ def get_macros(
     filenames: Set[str],
 ) -> Generator[Macro, None, None]:
     macros = manifest.get("macros", {})
+    print(filenames)
     for key, macro in macros.items():
         split_key = key.split(".")
         filename = split_key[-1]
-        print(filename)
         if filename=="cents_to_dollars":
             print("first condition",filename in filenames)
         
@@ -163,7 +164,8 @@ def get_macro_sqls(paths: Sequence[str], manifest: Dict[str, Any]) -> Dict[str, 
     sqls = get_filenames(paths, [".sql"])
     macro_paths = [m["path"] for m in manifest.get("macros", {}).values()]
     macro_sqls = get_filenames(macro_paths, extensions=[".sql"])
-    return {k: v for k, v in sqls.items() if k in macro_sqls and v == macro_sqls[k]}
+    intermediate_path=str(Path.home())+"/Downloads/jaffle_shop-main/"
+    return {k: v for k, v in sqls.items() if k in macro_sqls and v == Path(os.path.join(intermediate_path,str(macro_sqls[k])))}
 
 
 def get_model_sqls(paths: Sequence[str], manifest: Dict[str, Any]) -> Dict[str, Any]:

@@ -19,7 +19,6 @@ def has_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
     status_code = 0
     sqls = get_macro_sqls(paths, manifest)
     filenames = set(sqls.keys())
-    print(filenames)
 
     # get manifest macros that pre-commit found as changed
     macros = get_macros(manifest, filenames)
@@ -28,8 +27,11 @@ def has_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
 
  
 # Opening JSON file
-with open('/Users/miriam.benallou/Downloads/jaffle_shop-main/target/manifest.json') as json_file:
-    data = json.load(json_file)
-    path_macro = ["/Users/miriam.benallou/Downloads/jaffle_shop-main/macros"]
-    has_reference(path_macro, data)
+
+f = open('/Users/charbel.naba/Downloads/jaffle_shop-main/target/manifest.json')
+data = json.load(f)
+path_macro = ["/Users/charbel.naba/Downloads/jaffle_shop-main/macros/cents_to_dollars.sql"]
+has_reference(path_macro, data)
+
+    
 
