@@ -6,6 +6,7 @@ import argparse
 from pre_commit_dbt.utils import add_filenames_args
 import logging
 
+
 def has_models(paths: Sequence[str]):
     status_code = 0
     ymls = get_filenames(paths, [".yml", ".yaml"])
@@ -18,7 +19,6 @@ def has_models(paths: Sequence[str]):
             f"does not have any model",
         )
     return status_code
-
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int :
