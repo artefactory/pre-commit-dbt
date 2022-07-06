@@ -1382,6 +1382,46 @@ If you `run` and then you delete argument description from a properties file, th
 
 -----
 
+### `check-macro-is-referenced`
+
+Ensures that the macro has been referenced in a model.
+
+#### Arguments
+
+`--manifest`: location of `manifest.json` file. Usually `target/manifest.json`. This file contains a full representation of dbt project. **Default: `target/manifest.json`**
+
+#### Example
+
+```
+repos:
+- repo: https://github.com/offbi/pre-commit-dbt
+ rev: v0.1.1
+ hooks:
+ - id: check-macro-is-referenced
+```
+#### When to use it
+
+You want to make sure that all macros created are referenced at least in one of your models.
+
+#### Requirements
+
+| Macro exists in `manifest.json` <sup id="a1">[1](#f1)</sup> | Macro exists in `catalog.json` <sup id="a2">[2](#f2)</sup> |
+| :----: | :----------: |
+| :x: Not needed since it also validates properties files | :x: Not needed |
+
+<sup id="f1">1</sup> It means that you need to run `dbt run`, `dbt compile` before run this hook.<br/>
+<sup id="f2">2</sup> It means that you need to run `dbt docs generate` before run this hook.
+
+#### How it works
+
+- Hook takes all existing macros in the manifest file 
+- The macro name is obtained by splitting the macro obtained from the manifest
+- The manifest is scanned for a macro
+- We check if the macro is referenced in the model tag of the manifest file 
+
+-----
+
+
 ### `generate-missing-sources`
 
 If any source is missing this hook tries to create it.

@@ -26,6 +26,7 @@ def has_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
     # get manifest macros that pre-commit found as changed
     macros = get_macros(manifest, filenames)
     for macro in macros :
+        print(macro)
         macro_name = macro.macro_name
         found = False
         for key,value in nodes.items() :
