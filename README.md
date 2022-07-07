@@ -31,6 +31,9 @@ If this is the case, `pre-commit-dbt` is here to help you!
 
 :bulb: Click on hook name to view the details.
 
+**Exposure checks:**
+ * [`check-exposure-has-models`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-has-models): Check if the exposures depends on at least one model
+
 **Model checks:**
  * [`check-column-desc-are-same`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-desc-are-same): Check column descriptions are the same.
  * [`check-column-name-contract`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-name-contract): Check column name abides to contract.
