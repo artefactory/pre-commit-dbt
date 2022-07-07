@@ -33,6 +33,7 @@ If this is the case, `pre-commit-dbt` is here to help you!
 
 **Exposure checks:**
  * [`check-exposure-has-models`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure-has-models): Check if the exposures depends on at least one model
+ * [`check-exposure_folder_constraint`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-exposure_folder_constraint): Ensures exposures are only defined in a given folder X.
 
 **Model checks:**
  * [`check-column-desc-are-same`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-column-desc-are-same): Check column descriptions are the same.

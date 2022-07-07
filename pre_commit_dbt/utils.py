@@ -77,6 +77,19 @@ class MacroSchema:
 
 
 @dataclass
+class ExposureSchema:
+    exposure_name: str
+    exposure_type: str
+    owner: Dict[str, Any]
+    filename: str
+    prefix: str = "exposure"
+
+@dataclass
+class ExposurePathSchema:
+    exposure_name: str
+    exposure_path: Path
+
+@dataclass
 class SourceSchema:
     source_name: str
     table_name: str
@@ -123,6 +136,16 @@ def paths_to_dbt_models(
 ) -> List[str]:
     return [prefix + Path(path).stem + postfix for path in paths]
 
+def get_exposure_paths(yml_files: Sequence[Path]) -> Generator[ExposurePathSchema, None, None]:
+    for yml_file in yml_files:
+        exposures = yaml.safe_load(yml_file.open()).get("exposures", [])
+        for exposure in exposures:
+            exposure_name = exposure.get("name")
+            exposure_path = yml_file
+            yield ExposurePathSchema(
+                    exposure_name=exposure_name,
+                    exposure_path=exposure_path
+                ) 
 
 def get_json(json_filename: str) -> Dict[str, Any]:
     try:
