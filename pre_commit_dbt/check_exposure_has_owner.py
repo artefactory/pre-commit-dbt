@@ -6,14 +6,7 @@ import argparse
 from pre_commit_dbt.utils import add_filenames_args
 
     
-def has_owner(paths: Sequence[str]):
-    """
-    Checks if exposures have owners with a name field defined
-    Arguments:
-        paths: a sequence of paths
-    Returns:
-        A status code (0 if the defined exposures have owners with a defined name field and 1 if not)
-    """
+def is_owner_name_defined(paths: Sequence[str]) -> int:
     status_code = 0
     ymls = get_filenames(paths, [".yml", ".yaml"])
     exposures = get_exposures(list(ymls.values()))
@@ -33,7 +26,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int :
     parser = argparse.ArgumentParser()
     add_filenames_args(parser)
     args = parser.parse_args(argv)
-    return has_owner(paths=args.filenames)
+    return is_owner_name_defined(paths=args.filenames)
 
 
 if __name__ == "__main__":
