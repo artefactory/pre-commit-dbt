@@ -34,16 +34,6 @@ sources:
     ),
 )
 
-''''
-Tests the check-source-folder-constraint hook
- Arguments:
-     schema_yml: source content
-     expected_status_code: status code that should be returned by the test for the current test case
-     source_path: path of the yaml file where the source is defined
-     undesired_path: path/name of the folder where we don't want the source to be defined
- Returns:
-     A status code (0 if the sources are not placed in the specified folder and 1 otherwise)
-'''
 @pytest.mark.parametrize(("schema_yml", "expected_status_code", "source_path", "undesired_path"), TESTS)
 def test_check_source_folder_constraint(schema_yml, expected_status_code, source_path, undesired_path, tmpdir):
     source_dir=tmpdir.mkdir(source_path[:source_path.rfind(os.sep)]) # source_path[:source_path.rfind(os.sep)] would return the path without the names of the yaml file

@@ -7,14 +7,6 @@ from pre_commit_dbt.utils import add_filenames_args
 from pre_commit_dbt.utils import get_source_path
 
 def check_source_path(paths: Sequence[str], source_folder_path: str) -> int:
-    """
-    Checks if sources are defined in the folder specified by the user
-    Arguments:
-        paths: a sequence of paths
-        source_folder_path: string that represents the specified folder's path
-    Returns:
-        A status code (0 if the sources are placed in the correct folder and 1 otherwise)
-    """   
     status_code = 0
     ymls = [Path(path) for path in paths]
 

@@ -262,29 +262,15 @@ def get_exposures(yml_files: Sequence[Path]) -> Generator[ExposureSchema, None, 
                 )
 
 
-def contains_source(yml_file:Path)->bool:
-    """
-    Checks if a YAML file contains a source definition
-    Arguments:
-        yml_file: a yaml file path
-    Returns:
-        True if a source is defined, False otherwise
-    """
+def contains_source_definition(yml_file:Path)->bool:
     schema = yaml.safe_load(yml_file.open())
     return True if schema.get("sources", [])!=0 else False
 
 def get_source_path(
     yml_files: Sequence[Path],
 ) -> Generator[SourceSchema, None, None]:
-    """
-    Returns the paths of yaml files that contain sources
-    Arguments:
-        yml_files: a sequence of yaml file paths
-    Returns:
-        Generator of the yaml file paths in which a source or more has been defined
-    """
     for yml_file in yml_files:
-        if contains_source(yml_file):
+        if contains_source_definition(yml_file):
             yield yml_file
 
 def obj_in_deps(obj: Any, dep_name: str) -> bool:
