@@ -176,7 +176,8 @@ def get_macros(
         split_key = key.split(".")
         filename = split_key[-1]
         if filename in filenames and split_key[0] == "macro":
-            yield Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
+            macro_ref = Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
+            yield macro_ref
 
 
 def get_flags(flags: Optional[Sequence[str]] = None) -> List[str]:

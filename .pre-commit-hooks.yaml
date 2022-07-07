@@ -272,3 +272,9 @@
     entry: check-exposure-has-models
     language: python
     types: [yaml]
+-   id: check-macro-is-referenced
+     name: Check macro is referenced 
+     description: Defined macros have to be referenced 
+     entry: check-macro-is-referenced
+     language: python
+     types: [sql] 
