@@ -29,7 +29,7 @@ def macros_have_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int
     return status_code
 
 
-def main(argv: Optional[Sequence[str]] = None) -> int :
+def main(argv: Optional[Sequence[str]] = None) -> int:
      parser = argparse.ArgumentParser()
      add_filenames_args(parser)
      

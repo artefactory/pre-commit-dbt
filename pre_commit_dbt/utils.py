@@ -184,7 +184,7 @@ def get_macro_name(macro_ref: str) -> str:
     return macro_ref.split(".")[-1]
 
 
-def get_macros_names_in_models(manifest: Dict[str, Any]) -> str:
+def get_macros_names_in_models(manifest: Dict[str, Any]) -> List[str]:
     macros = []
     nodes = manifest.get("nodes", {})
     for key,value in nodes.items() :
