@@ -9,21 +9,8 @@ from pre_commit_dbt.utils import add_manifest_args
 from pre_commit_dbt.utils import get_json
 from pre_commit_dbt.utils import get_macro_sqls
 from pre_commit_dbt.utils import get_macros
+from pre_commit_dbt.utils import get_macros_names_in_models
 from pre_commit_dbt.utils import JsonOpenError
-    
-
-def get_macros_names_in_models(manifest: Dict[str, Any]) -> str:
-    macros = []
-    nodes = manifest.get("nodes", {})
-    for key,value in nodes.items() :
-            macros_ref_in_models = value.get("depends_on",{}).get("macros",{})
-            macros_ref_names = map(lambda macro_ref: get_macro_name(macro_ref), macros_ref_in_models)
-            macros.extend(macros_ref_names)
-    return macros
-
-
-def get_macro_name(macro_ref: str) -> str:
-    return macro_ref.split(".")[-1]
 
 
 def macros_have_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:

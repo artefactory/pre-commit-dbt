@@ -274,7 +274,7 @@
     types: [yaml]
 -   id: check-macros-are-referenced
      name: Check macros are referenced 
-     description: Defined macros have to be referenced 
-     entry: check-macro-are-referenced
+     description: Check macros have to be referenced 
+     entry: check-macros-are-referenced
      language: python
      types: [sql] 

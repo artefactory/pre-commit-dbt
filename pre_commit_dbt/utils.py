@@ -180,6 +180,20 @@ def get_macros(
             yield macro_ref
 
 
+def get_macro_name(macro_ref: str) -> str:
+    return macro_ref.split(".")[-1]
+
+
+def get_macros_names_in_models(manifest: Dict[str, Any]) -> str:
+    macros = []
+    nodes = manifest.get("nodes", {})
+    for key,value in nodes.items() :
+            macros_ref_in_models = value.get("depends_on",{}).get("macros",{})
+            macros_ref_names = map(lambda macro_ref: get_macro_name(macro_ref), macros_ref_in_models)
+            macros.extend(macros_ref_names)
+    return macros
+
+
 def get_flags(flags: Optional[Sequence[str]] = None) -> List[str]:
     if flags:
         return [flag.replace("+", "-") for flag in flags if flag]
