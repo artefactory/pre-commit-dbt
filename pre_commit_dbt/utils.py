@@ -13,7 +13,6 @@ from typing import Sequence
 from typing import Set
 from typing import Text
 from typing import Union
-
 import yaml
 
 
@@ -261,6 +260,18 @@ def get_exposures(yml_files: Sequence[Path]) -> Generator[ExposureSchema, None, 
                     owner=exposure.get("owner"),
                     models=exposure.get("depends_on"),
                 )
+
+
+def contains_source_definition(yml_file:Path)->bool:
+    schema = yaml.safe_load(yml_file.open())
+    return True if schema.get("sources", [])!=0 else False
+
+def get_source_path(
+    yml_files: Sequence[Path],
+) -> Generator[SourceSchema, None, None]:
+    for yml_file in yml_files:
+        if contains_source_definition(yml_file):
+            yield yml_file
 
 def obj_in_deps(obj: Any, dep_name: str) -> bool:
     dep_split = set(dep_name.split("."))
