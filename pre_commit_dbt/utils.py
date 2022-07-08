@@ -193,6 +193,9 @@ def get_macros_names_in_models(manifest: Dict[str, Any]) -> List[str]:
             macros.extend(macros_ref_names)
     return macros
 
+def get_unreferenced_macros(macros: List[Macro], referenced_macros: List[str]) -> List[Macro]:
+    return [x for x in macros if x.macro_name not in referenced_macros]
+
 
 def get_flags(flags: Optional[Sequence[str]] = None) -> List[str]:
     if flags:

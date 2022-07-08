@@ -10,6 +10,7 @@ from pre_commit_dbt.utils import get_json
 from pre_commit_dbt.utils import get_macro_sqls
 from pre_commit_dbt.utils import get_macros
 from pre_commit_dbt.utils import get_macros_names_in_models
+from pre_commit_dbt.utils import get_unreferenced_macros
 from pre_commit_dbt.utils import JsonOpenError
 
 
@@ -22,8 +23,9 @@ def macros_have_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int
     macros = list(get_macros(manifest, filenames))
     referenced_macros = get_macros_names_in_models(manifest)
 
-    macros_not_referenced = [x for x in macros if x.macro_name not in referenced_macros]
-    for macro in macros_not_referenced:
+    unreferenced_macros = get_unreferenced_macros(macro, referenced_macros)
+
+    for macro in unreferenced_macros:
         status_code = 1
         print(f'The macro {macro.macro_name} was not referenced in any model.')
     return status_code
