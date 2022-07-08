@@ -51,6 +51,7 @@
 **Macro checks:**
  * [`check-macro-has-description`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-has-description): Check the macro has description.
  * [`check-macro-arguments-have-desc`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-arguments-have-desc): Check the macro arguments have description.
+  * [`check-macros-are-referenced`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-macros-are-referenced): Check the macros are referenced.
 
 **Modifiers:**
  * [`generate-missing-sources`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#generate-missing-sources): If any source is missing this hook tries to create it.
@@ -1452,6 +1453,45 @@ repos:
 
 You want to make sure that the field `depends_on` in each exposure is defined
 -----
+
+### `check-macros-are-referenced`
+
+ Ensures that the macro has been referenced in a model.
+
+ #### Arguments
+
+ `--manifest`: location of `manifest.json` file. Usually `target/manifest.json`. This file contains a full representation of dbt project. **Default: `target/manifest.json`**
+
+ #### Example
+
+ ```
+ repos:
+ - repo: https://github.com/offbi/pre-commit-dbt
+  rev: v0.1.1
+  hooks:
+  - id: check-macros-are-referenced
+ ```
+ #### When to use it
+
+ You want to make sure that all macros created are referenced at least in one of your models.
+
+ #### Requirements
+
+ | Macro exists in `manifest.json` <sup id="a1">[1](#f1)</sup> | Macro exists in `catalog.json` <sup id="a2">[2](#f2)</sup> |
+ | :----: | :----------: |
+ | :x: Not needed since it also validates properties files | :x: Not needed |
+
+ <sup id="f1">1</sup> It means that you need to run `dbt run`, `dbt compile` before run this hook.<br/>
+ <sup id="f2">2</sup> It means that you need to run `dbt docs generate` before run this hook.
+
+ #### How it works
+
+ - Hook takes all existing macros in the manifest file 
+ - The macro name is obtained by splitting the macro obtained from the manifest
+ - The manifest is scanned for a macro
+ - We check if the macro is referenced in the model tag of the manifest file 
+
+ -----
 
 ### `generate-missing-sources`
 

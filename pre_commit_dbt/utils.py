@@ -175,7 +175,25 @@ def get_macros(
         split_key = key.split(".")
         filename = split_key[-1]
         if filename in filenames and split_key[0] == "macro":
-            yield Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
+            macro_ref = Macro(key, macro.get("name"), filename, macro)  # pragma: no mutate
+            yield macro_ref
+
+
+def get_macro_name(macro_ref: str) -> str:
+    return macro_ref.split(".")[-1]
+
+
+def get_macros_names_in_models(manifest: Dict[str, Any]) -> List[str]:
+    macros = []
+    nodes = manifest.get("nodes", {})
+    for key,value in nodes.items() :
+            macros_ref_in_models = value.get("depends_on",{}).get("macros",{})
+            macros_ref_names = map(lambda macro_ref: get_macro_name(macro_ref), macros_ref_in_models)
+            macros.extend(macros_ref_names)
+    return macros
+
+def get_unreferenced_macros(macros: List[Macro], referenced_macros: List[str]) -> List[Macro]:
+    return [x for x in macros if x.macro_name not in referenced_macros]
 
 
 def get_flags(flags: Optional[Sequence[str]] = None) -> List[str]:

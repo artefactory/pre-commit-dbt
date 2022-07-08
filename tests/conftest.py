@@ -19,6 +19,8 @@ MANIFEST = {
         "model.with_tags_foo": {"tags": ["foo"]},
         "model.with_tags_empty": {"tags": []},
         "model.without_tags": {"database": "prod", "schema": "test"},
+        "model.with_referencing": {"depends_on": {"macros":["macro.aa.with_referencing"]}},
+        "model.without_referencing": {"depends_on":{"macros":[]}},
         "model.test.catalog_cols": {
             "database": "test",
             "schema": "test",
@@ -169,6 +171,18 @@ MANIFEST = {
             "path": "macros/aa/without_arguments_description.sql",
             "arguments": {"test1": {"name": "test1"}, "test2": {"name": "test2"}},
         },
+        "macro.with_referencing": {
+             "path": "macros/aa/with_referencing.sql",
+             "name": "with_referencing"
+         },
+          "macro.without_referencing": {
+             "path": "macros/aa/without_referencing.sql",
+             "name": "without_referencing"
+         },
+         "macro.without_referencing_2": {
+             "path":"macros/aa/without_referencing_2.sql",
+             "name": "without_referencing_2"
+         }
     },
     "child_map": {
         "source.test.test1": ["test.test1", "test.test2", "model.with_schema"],

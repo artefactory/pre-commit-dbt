@@ -76,6 +76,7 @@ If this is the case, `pre-commit-dbt` is here to help you!
 **Macro checks:**
  * [`check-macro-has-description`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-has-description): Check the macro has description.
  * [`check-macro-arguments-have-desc`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-arguments-have-desc): Check the macro arguments have description.
+  * [`check-macros-are-referenced`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-macros-are-referenced): Check the macros are referenced.
 
 **Modifiers:**
  * [`generate-missing-sources`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#generate-missing-sources): If any source is missing this hook tries to create it.
