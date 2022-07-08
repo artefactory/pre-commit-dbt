@@ -48,7 +48,7 @@
 **Macro checks:**
  * [`check-macro-has-description`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-has-description): Check the macro has description.
  * [`check-macro-arguments-have-desc`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#check-macro-arguments-have-desc): Check the macro arguments have description.
-  * [`check-macro-is-referenced`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-macro-is-referenced): Check the macro is referenced.
+  * [`check-macros-are-referenced`](https://github.com/artefactory/pre-commit-dbt/blob/main/HOOKS.md#check-macros-are-referenced): Check the macros are referenced.
 
 **Modifiers:**
  * [`generate-missing-sources`](https://github.com/offbi/pre-commit-dbt/blob/main/HOOKS.md#generate-missing-sources): If any source is missing this hook tries to create it.
@@ -1411,7 +1411,7 @@ repos:
 You want to make sure that the field `depends_on` in each exposure is defined
 -----
 
-### `check-macro-is-referenced`
+### `check-macros-are-referenced`
 
  Ensures that the macro has been referenced in a model.
 
@@ -1426,7 +1426,7 @@ You want to make sure that the field `depends_on` in each exposure is defined
  - repo: https://github.com/offbi/pre-commit-dbt
   rev: v0.1.1
   hooks:
-  - id: check-macro-is-referenced
+  - id: check-macros-are-referenced
  ```
  #### When to use it
 

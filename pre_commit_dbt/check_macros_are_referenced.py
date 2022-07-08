@@ -10,41 +10,38 @@ from pre_commit_dbt.utils import get_json
 from pre_commit_dbt.utils import get_macro_sqls
 from pre_commit_dbt.utils import get_macros
 from pre_commit_dbt.utils import JsonOpenError
+    
 
-def get_macro_name(macros_ref):
-    return map(lambda x:x.split(".")[-1], macros_ref) 
-
-def get_macros_in_models(manifest):
-    """
-    Gets macros listed in the "depends_on" key of the "nodes" key in the manifest
-    Arguments:
-        manifest: manifest file 
-    Returns:
-        macros: list of macros
-    """
+def get_macros_names_in_models(manifest: Dict[str, Any]) -> str:
     macros = []
     nodes = manifest.get("nodes", {})
     for key,value in nodes.items() :
             macros_ref_in_models = value.get("depends_on",{}).get("macros",{})
-            macro_ref_name = get_macro_name(macros_ref_in_models) 
-            macros.extend(macro_ref_name)
+            macros_ref_names = map(lambda macro_ref: get_macro_name(macro_ref), macros_ref_in_models)
+            macros.extend(macros_ref_names)
     return macros
 
-def is_referenced(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
+
+def get_macro_name(macro_ref: str) -> str:
+    return macro_ref.split(".")[-1]
+
+
+def macros_have_reference(paths: Sequence[str], manifest: Dict[str, Any]) -> int:
     status_code = 0
     sqls = get_macro_sqls(paths, manifest)
     filenames = set(sqls.keys())
 
     # get manifest macros that pre-commit found as changed
     macros = list(get_macros(manifest, filenames))
-    referenced_macros = get_macros_in_models(manifest)
+    referenced_macros = get_macros_names_in_models(manifest)
 
     macros_not_referenced = [x for x in macros if x.macro_name not in referenced_macros]
     for macro in macros_not_referenced:
         status_code = 1
         print(f'The macro {macro.macro_name} was not referenced in any model.')
     return status_code
-    
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int :
      parser = argparse.ArgumentParser()
      add_filenames_args(parser)
@@ -58,7 +55,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int :
          print(f"Unable to load manifest file ({e})")
          return 1
 
-     return is_referenced(paths=args.filenames, manifest=manifest)
+     return macros_have_reference(paths=args.filenames, manifest=manifest)
 
 if __name__ == "__main__":
      exit(main())

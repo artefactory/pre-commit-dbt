@@ -1,6 +1,6 @@
 import pytest
 
-from pre_commit_dbt.check_macro_is_referenced import main
+from pre_commit_dbt.check_macros_are_referenced import main
 
 
  # Input args, valid manifest, expected return value
