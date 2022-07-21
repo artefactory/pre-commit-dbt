@@ -188,7 +188,7 @@
     entry: check-source-tags
     language: python
     types_or: [yaml]
-    id: check-exposure-folder-constraint
+-   id: check-exposure-folder-constraint
     name: Check exposure folder constraint
     description: Ensures exposures are only defined in a given folder X.
     entry: check-exposure-folder-constraint
@@ -270,6 +270,8 @@
     name: Check exposure has models
     description: Checks that the exposure has at least one model
     entry: check-exposure-has-models
+    language: python
+    types: [yaml]
 -   id: check-exposure-has-owner
     name: Check exposure has  owner
     description: Checks that the exposure has an owner
@@ -283,8 +285,8 @@
     language: python
     types: [yaml]
 -   id: check-macros-are-referenced
-     name: Check macros are referenced 
-     description: Check macros have to be referenced 
-     entry: check-macros-are-referenced
-     language: python
-     types: [sql] 
+    name: Check macros are referenced
+    description: Check macros have to be referenced
+    entry: check-macros-are-referenced
+    language: python
+    types: [sql]
